@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if loc  %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuDA0lf_rl4dNalt0yyABWUWlYxsgKqeA&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // 
+      let map;
+      let service;
+      let infowindow;
+
+      function initMap() {
+        const loc = document.getElementById("loc").innerHTML;
+        const coords = "{{coords}}".split(";");
+        const caltech = new google.maps.LatLng(34.138510, -118.125312);
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: caltech,
+          zoom: 15,
+        });
+        const request = {
+          query: loc,
+          fields: ["name", "geometry"],
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.findPlaceFromQuery(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+              // createMarker(results[i]);
+            }
+            map.setCenter(results[0].geometry.location);
+          }
+        });
+        
+        var bounds = new google.maps.LatLngBounds();
+        for (let i = 0; i < coords.length; i ++) {
+            let name = coords[i].split(":")[0];
+            let lat = parseFloat(coords[i].split(":")[1].split(",")[0]);
+            let lng = parseFloat(coords[i].split(":")[1].split(",")[1]);
+            const marker = new google.maps.Marker({
+              map,
+              position: { lat: lat, lng: lng },
+              label: name.split(".%20")[0]
+            });
+            google.maps.event.addListener(marker, "click", () => {
+                window.location.replace('/restaurant/'+encodeURI(name.split('.%20')[1]));
+            });
+            bounds.extend(marker.getPosition()); 
+        }
+        map.fitBounds(bounds);
+      }
+
+      function createMarker(place) {
+        const marker = new google.maps.Marker({
+          map,
+          position: place.geometry.location,
+        });
+        google.maps.event.addListener(marker, "click", () => {
+          infowindow.setContent(place.name);
+          infowindow.open(map);
+        });
+      }
+    </script>
+{% endif %}
+<br>
+    <h2 class="restTitle">{% block title %} Explore chefs in your area! {% endblock %}</h2>
+    <br>
+<form method="post">
+    <div class="form-group">
+        <label for="loc">Enter your address to find places closest to you!</label>
+        <input name="loc" type="text" placeholder="Address"
+                  class="form-control"></input>
+        <label for="query">Or, search menu, tags, names, and descriptions</label>
+        <input name="query" type="text" placeholder="E.g. Vietnamese food with delivery"
+                  class="form-control"></input>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+
+{% if loc  %}
+	    
+<div style="width: 100%; height: 500px">
+<div id="map"></div>
+</div>
+<span id="loc" style="visibility:hidden">{{loc}}</span>
+
+{% endif %}
+
+<br>
+    {% for post in posts %}
+    <div class="flex-rest-full">
+        <a href="{{ url_for('restaurant', post_id=post['id']) }}">
+            <h3>{{ post['name'] }}</h3>
+        </a>
+
+    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <span style="">
+              {{ post['full_add'] }}
+            </span>
+    <div class="flex-restaurant">
+        {% if post['dist_display']%}
+            <span style="background-color: #5C913B">
+              {{ post['dist_display'] }}
+            </span>
+        {% endif %}
+        {% if post['genre'] != "none" %}
+            <span style="background-color: #DD2E44">
+              {{ post['genre'] }}
+            </span>
+        {% endif %}
+        <span style="">
+          {{ post['phone'] }}
+        </span>
+        {% for tag in post['tags'] %}
+          <span style="background-color: #5C913B">
+            {{ tag }}
+          </span>
+        {% endfor %}
+        {% if post['score'] %}
+            {% if post['score'] > 0.1 %}
+                <span style="background-color: #5C913B">
+                  :)
+                </span>
+            {% elif post['score'] < 0 %}
+                <span style="background-color: #DD2E44">
+                  :(
+                </span>
+            {% else %}
+                <span style="background-color: black">
+                  :|
+                </span>
+            {% endif %}
+        {% endif %}
+</div>
+</div>
+    </div>
+        {% endfor %}
+    <hr>
+
+{% endblock %}

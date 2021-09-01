@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="banner" >
+    <div class="container content-header">
+      <br></br>
+      <h1 class="font-weight-semibold">{% block title %} Potluck{% endblock %}<br></h1>
+      <h5 class="section-subtitle text-muted">Potluck helps pair people who want quality food at a lower price with chefs<br> who need work but don't have the bandwith to setup shop.</h5>
+      <div>
+        <a class="btn btn-light mr-1" href="/chef">I'm a chef</a>
+        <a class="btn btn-success ml-1" href="/eat">I'm hungry</a>
+      </div>
+      <img src="{{ url_for('static', filename= 'images/Group171.svg') }}" alt="" class="img-fluid">
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="container">
+      <section class="features-overview" id="features-section" >
+        <div class="content-header">
+          <h2>How it works</h2>
+          <h6 class="section-subtitle text-muted">Chefs tell us what types of food they make and the<br>pricing, and then you can find the chefs closest to you!</h6>
+        </div>
+        <div class="d-md-flex justify-content-between">
+          <div class="grid-margin d-flex justify-content-start">
+            <div class="features-width">
+              <img src="{{ url_for('static', filename= 'images/chef_e.png') }}" alt="" class="img-icons">
+              <h5 class="py-3">Establish<br>Eateries</h5>
+              <p class="text-muted">Chefs input their information, food, and prices, and we store this information in a secure, encrypted database.</p>
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-center">
+            <div class="features-width">
+              <img src="{{ url_for('static', filename= 'images/burger_a.png') }}" alt="" class="img-icons">
+              <h5 class="py-3">Find The<br>Best Food</h5>
+              <p class="text-muted">Using Natural Language Processing and Driving Distance Algorithms, we hand-select the best chefs nearby, no matter what genre you prefer.</p>
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-end">
+            <div class="features-width">
+              <img src="{{ url_for('static', filename= 'images/comm.png') }}" alt="" class="img-icons">
+              <h5 class="py-3">Build your<br>Community</h5>
+              <p class="text-muted">Connect instantly with local chefs, leave your feedback, creating a tight-knit community inspired by good food.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="case-studies" id="case-studies-section">
+        <div class="row grid-margin">
+          <div class="col-12 text-center pb-5">
+            <h2>Our core values</h2>
+            <h6 class="section-subtitle text-muted">How we envision a community-based way to enjoy food.</h6>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in">
+            <div class="card color-cards">
+              <div class="card-body p-0">
+                <div class="bg-primary text-center card-contents">
+                  <div class="card-image">
+                    <img src="{{ url_for('static', filename= 'images/Group95.svg') }}" class="case-studies-card-img" alt="">
+                  </div>
+                  <div class="card-desc-box d-flex align-items-center justify-content-around">
+                    <div>
+                      <h6 class="text-white pb-2 px-3">Online marketing</h6>
+                      <button class="btn btn-white">Read More</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-details text-center pt-4">
+                    <h6 class="m-0 pb-1">No Enrollment Premiums</h6>
+                    <p>Chefs who partner with us are entitled to 100% of their earnings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card color-cards">
+              <div class="card-body p-0">
+                <div class="bg-warning text-center card-contents">
+                  <div class="card-image">
+                      <img src="{{ url_for('static', filename= 'images/Group108.svg') }}" class="case-studies-card-img" alt="">
+                  </div>
+                  <div class="card-desc-box d-flex align-items-center justify-content-around">
+                    <div>
+                      <h6 class="text-white pb-2 px-3">Community-Based Marketing</h6>
+                      <button class="btn btn-white">We use sentiment anlaysis to promote your business, straight from those you serve.</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-details text-center pt-4">
+                    <h6 class="m-0 pb-1">Ease of Use</h6>
+                    <p>Just provide your address and favorite food. We take care of helping you get there and connect with chefs, through our databases and the Google Maps API.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card color-cards">
+              <div class="card-body p-0">
+                <div class="bg-violet text-center card-contents">
+                  <div class="card-image">
+                      <img src="{{ url_for('static', filename= 'images/Group126.svg') }}" class="case-studies-card-img" alt="">
+                  </div>
+                  <div class="card-desc-box d-flex align-items-center justify-content-around">
+                    <div>
+                      <h6 class="text-white pb-2 px-3">Know more about Web Designing</h6>
+                      <button class="btn btn-white">Read More</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-details text-center pt-4">
+                    <h6 class="m-0 pb-1">Community-Based Marketing</h6>
+                    <p>We use sentiment anlaysis to promote your business, straight from those you serve.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 stretch-card" data-aos="zoom-in" data-aos-delay="600">
+            <div class="card color-cards">
+              <div class="card-body p-0">
+                <div class="bg-success text-center card-contents">
+                  <div class="card-image">
+                      <img src="{{ url_for('static', filename= 'images/Group115.svg') }}" class="case-studies-card-img" alt="">
+                  </div>
+                  <div class="card-desc-box d-flex align-items-center justify-content-around">
+                    <div>
+                      <h6 class="text-white pb-2 px-3">Know more about Software Development</h6>
+                      <button class="btn btn-white">Read More</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-details text-center pt-4">
+                    <h6 class="m-0 pb-1">Understanding our Users</h6>
+                    <p>Our ranking algorithms help you decide the best food near you, in terms of both taste and convenience.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="contact-us" id="contact-section">
+        <div class="contact-us-bgimage grid-margin" >
+          <div class="pb-4">
+            <h4 class="px-3 px-md-0 m-0" data-aos="fade-down">Hungry to get started?</h4>
+            <h4 class="pt-1" data-aos="fade-down"><i>Browse Foods</i></h4>
+          </div>
+          <div data-aos="fade-up">
+            <a class="btn btn-rounded btn-outline-danger" href="/eat">Go</a>
+          </div>
+        </div>
+      </section>
+      <footer class="border-top">
+        <p class="text-center text-muted pt-4">Copyright © 2020 Nets Katz.</p>
+      </footer>
+    </div>
+  </div>
+{% endblock %}
